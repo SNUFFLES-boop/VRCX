@@ -38,7 +38,7 @@ function dotnetSetup() {
 
     if (!isDotNetInstalled()) {
         app.whenReady().then(() => {
-            dialog.showErrorBox('VRCX', 'Please install .NET 10.0 Runtime "dotnet-runtime-10.0" to run VRCX.');
+            dialog.showErrorBox('Femboy Locator', 'Please install .NET 10.0 Runtime "dotnet-runtime-10.0" to run Femboy Locator.');
             app.quit();
         });
     }
@@ -523,7 +523,7 @@ function createTray() {
             }
         },
         {
-            label: 'Quit VRCX',
+            label: 'Quit Femboy Locator',
             type: 'normal',
             click: function () {
                 appIsQuitting = true;
@@ -531,7 +531,7 @@ function createTray() {
             }
         }
     ]);
-    tray.setToolTip('VRCX');
+    tray.setToolTip('Femboy Locator');
     tray.setContextMenu(contextMenu);
 
     tray.on('click', () => {
@@ -576,7 +576,7 @@ async function installVRCX() {
             appImagePath = newPath;
         } catch (err) {
             console.error(`Error renaming AppImage ${newPath}`, err);
-            dialog.showErrorBox('VRCX', `Failed to rename AppImage ${newPath}`);
+            dialog.showErrorBox('Femboy Locator', `Failed to rename AppImage ${newPath}`);
             return;
         }
     }
@@ -586,9 +586,9 @@ async function installVRCX() {
     if (!hasAskedToMoveAppImage && appImagePath !== appImageHomePath) {
         const result = dialog.showMessageBoxSync(mainWindow, {
             type: 'question',
-            title: 'VRCX',
-            message: 'Do you want to install VRCX?',
-            detail: 'VRCX will be moved to your ~/Applications folder.',
+            title: 'Femboy Locator',
+            message: 'Do you want to install Femboy Locator?',
+            detail: 'Femboy Locator will be moved to your ~/Applications folder.',
             buttons: ['No', 'Yes']
         });
         if (result === 0) {
@@ -615,7 +615,7 @@ async function installVRCX() {
                 await updateDesktopFile();
             } catch (err) {
                 console.error(`Error moving AppImage ${appImageHomePath}`, err);
-                dialog.showErrorBox('VRCX', `Failed to move AppImage ${appImageHomePath}`);
+                dialog.showErrorBox('Femboy Locator', `Failed to move AppImage ${appImageHomePath}`);
                 return;
             }
         }
@@ -679,7 +679,7 @@ function updateDesktopFile() {
         }
     } catch (err) {
         console.error('Error creating desktop file:', err);
-        dialog.showErrorBox('VRCX', 'Failed to create desktop entry.');
+        dialog.showErrorBox('Femboy Locator', 'Failed to create desktop entry.');
         return;
     }
 }
@@ -793,7 +793,7 @@ function tryCopyFromWinePrefix() {
         }
     } catch (err) {
         console.error('Error copying from wine prefix:', err);
-        dialog.showErrorBox('VRCX', 'Failed to copy database from wine prefix.');
+        dialog.showErrorBox('Femboy Locator', 'Failed to copy database from wine prefix.');
     }
 }
 
