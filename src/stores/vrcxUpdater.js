@@ -60,6 +60,8 @@ export const useVRCXUpdaterStore = defineStore('VRCXUpdater', () => {
         if (isMacOS.value) {
             noUpdater.value = true;
         }
+        // personal Femboy Locator build: never pull official VRCX releases
+        noUpdater.value = true;
 
         const [VRCX_autoUpdateVRCX, VRCX_id] = await Promise.all([
             configRepository.getString('VRCX_autoUpdateVRCX', 'Auto Download'),
@@ -259,6 +261,9 @@ export const useVRCXUpdaterStore = defineStore('VRCXUpdater', () => {
         return { downloadUrl, hashString, size };
     }
     async function checkForVRCXUpdate() {
+        if (noUpdater.value) {
+            return false;
+        }
         if (
             !currentVersion.value ||
             currentVersion.value === 'VRCX Nightly Build' ||

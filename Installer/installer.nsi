@@ -17,7 +17,7 @@
     VIProductVersion "${PRODUCT_VERSION}"
     VIFileVersion "${VERSION}"
     VIAddVersionKey "FileVersion" "${VERSION}"
-    VIAddVersionKey "ProductName" "VRCX"
+    VIAddVersionKey "ProductName" "Femboy Locator"
     VIAddVersionKey "ProductVersion" "${PRODUCT_VERSION}"
     VIAddVersionKey "LegalCopyright" "Copyright vrcx-team, pypy, natsumi"
     VIAddVersionKey "FileDescription" "Friendship management tool for VRChat"
@@ -35,7 +35,7 @@
     SetCompressor /SOLID lzma
     SetCompressorDictSize 16
     Unicode True
-    Name "VRCX"
+    Name "Femboy Locator"
     OutFile "VRCX_Setup_x64.exe"
     InstallDir "$PROGRAMFILES64\VRCX"
     InstallDirRegKey HKLM "Software\VRCX" "InstallDir"
@@ -74,7 +74,7 @@
 
     ; Checkbox to launch VRCX.
     !define MUI_FINISHPAGE_RUN
-    !define MUI_FINISHPAGE_RUN_TEXT "Launch VRCX"
+    !define MUI_FINISHPAGE_RUN_TEXT "Launch Femboy Locator"
     !define MUI_FINISHPAGE_RUN_FUNCTION launchVRCX
 
     ; Checkbox to create desktop shortcut.
@@ -120,7 +120,7 @@ Function .onInit
     nsProcess::_FindProcess "$1"
     Pop $R1
     ${If} $R1 = 0
-        MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "VRCX is still running. $\n$\nClick `OK` to kill the running process or `Cancel` to cancel this installer." /SD IDOK IDCANCEL cancel
+        MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "Femboy Locator is still running. $\n$\nClick `OK` to kill the running process or `Cancel` to cancel this installer." /SD IDOK IDCANCEL cancel
             nsExec::ExecToStack "taskkill /IM VRCX.exe"
     ${Else}
         Goto done
@@ -140,7 +140,8 @@ Function .onInstSuccess
 FunctionEnd
 
 Function createDesktopShortcut
-    CreateShortcut "$DESKTOP\VRCX.lnk" "$INSTDIR\VRCX.exe"
+    Delete "$DESKTOP\VRCX.lnk"
+    CreateShortcut "$DESKTOP\Femboy Locator.lnk" "$INSTDIR\VRCX.exe"
 FunctionEnd
 
 Function launchVRCX
@@ -171,7 +172,7 @@ Section "Install" SecInstall
 
     WriteRegStr HKLM "Software\VRCX" "InstallDir" $INSTDIR
     WriteUninstaller "$INSTDIR\Uninstall.exe"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\VRCX" "DisplayName" "VRCX"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\VRCX" "DisplayName" "Femboy Locator"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\VRCX" "Publisher" "vrcx-team"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\VRCX" "DisplayVersion" "${VERSION}"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\VRCX" "DisplayArch" "x64"
@@ -186,16 +187,17 @@ Section "Install" SecInstall
     ${GetParameters} $R2
     ${GetOptions} $R2 /SKIP_SHORTCUT= $3
     StrCmp $3 "true" noShortcut
-        CreateShortCut "$SMPROGRAMS\VRCX.lnk" "$INSTDIR\VRCX.exe"
-        ApplicationID::Set "$SMPROGRAMS\VRCX.lnk" "VRCX"
+        Delete "$SMPROGRAMS\VRCX.lnk"
+        CreateShortCut "$SMPROGRAMS\Femboy Locator.lnk" "$INSTDIR\VRCX.exe"
+        ApplicationID::Set "$SMPROGRAMS\Femboy Locator.lnk" "VRCX"
     noShortcut:
 
     WriteRegStr HKCU "Software\Classes\vrcx" "" "URL:vrcx"
-    WriteRegStr HKCU "Software\Classes\vrcx" "FriendlyTypeName" "VRCX"
+    WriteRegStr HKCU "Software\Classes\vrcx" "FriendlyTypeName" "Femboy Locator"
     WriteRegStr HKCU "Software\Classes\vrcx" "URL Protocol" ""
     WriteRegExpandStr HKCU "Software\Classes\vrcx\DefaultIcon" "" "$INSTDIR\VRCX.ico"
     WriteRegStr HKCU "Software\Classes\vrcx\shell" "" "open"
-    WriteRegStr HKCU "Software\Classes\vrcx\shell\open" "FriendlyAppName" "VRCX"
+    WriteRegStr HKCU "Software\Classes\vrcx\shell\open" "FriendlyAppName" "Femboy Locator"
     WriteRegStr HKCU "Software\Classes\vrcx\shell\open\command" "" '"$INSTDIR\VRCX.exe" /uri="%1" /params="%2 %3 %4"'
 SectionEnd
 
@@ -208,7 +210,7 @@ Section "Uninstall"
     nsProcess::_FindProcess "$1"
     Pop $R1
     ${If} $R1 = 0
-        MessageBox MB_OK|MB_ICONEXCLAMATION "VRCX is still running. Cannot uninstall this software.$\nPlease close VRCX and try again." /SD IDOK
+        MessageBox MB_OK|MB_ICONEXCLAMATION "Femboy Locator is still running. Cannot uninstall this software.$\nPlease close VRCX and try again." /SD IDOK
         Abort
     ${EndIf}
 
@@ -221,5 +223,7 @@ Section "Uninstall"
     ${IfNot} ${Silent}
         Delete "$SMPROGRAMS\VRCX.lnk"
         Delete "$DESKTOP\VRCX.lnk"
+        Delete "$SMPROGRAMS\Femboy Locator.lnk"
+        Delete "$DESKTOP\Femboy Locator.lnk"
     ${EndIf}
 SectionEnd

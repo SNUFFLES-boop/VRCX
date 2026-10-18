@@ -63,7 +63,7 @@ module.exports = {
         mimeTypes: ['x-scheme-handler/vrcx'],
         desktop: {
             entry: {
-                Name: 'VRCX',
+                Name: 'Femboy Locator',
                 Comment: 'Friendship management tool for VRChat',
                 Icon: 'VRCX',
                 Terminal: 'false',
